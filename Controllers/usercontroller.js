@@ -5,7 +5,7 @@ const User = require('../models/usermodels.js');
 
 const JWT_SECRET_KEY = process.env.SECRET_KEY;
 const signup = async (req, res) => {
-    const { email, password, name } = req.body;
+    const { email, password, name,role } = req.body;
     try {
         const existingUser = await User.findOne({ email });
         if (existingUser) {
