@@ -3,7 +3,8 @@ const Item = require('../models/itemmodels.js');
 const PromoCode = require('../models/promocodemodel.js');
 
 const addandupdate = async (req, res) => {
-    const { userID, items, promoCode } = req.body;
+    const {userID} = req.query; 
+    const {items, promoCode } = req.body;
     try {
         const existingCart = await Cart.findOne({ userID });
         if (existingCart) {
