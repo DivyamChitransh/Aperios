@@ -57,23 +57,35 @@ const getCart = async (req, res) => {
 
 const applyPromoCode = async (req, res) => {
     const { userID, promoCode } = req.body;
-
     try {
         const cart = await Cart.findOne({ userID });
         if (!cart) {
             return res.status(404).json({ message: 'Cart not found' });
         }
-        const promo = await PromoCode.findOne({ code: promoCode });
+    
+        let promo = null;
+    
+        if (promoCode.match(/^[0-9a-fA-F]{24}$/)) {
+            promo = await PromoCode.findById(promoCode);
+        } 
+            
+        if (!promo) {
+            promo = await PromoCode.findOne({ code: promoCode });
+        }
+    
         if (!promo) {
             return res.status(404).json({ message: 'Promo code not found' });
         }
+    
         if (promo.expiresAt < Date.now()) {
             return res.status(400).json({ message: 'Promo code has expired' });
         }
+    
         if (promo.usageLimit <= 0) {
             return res.status(400).json({ message: 'Promo code usage limit exceeded' });
         }
-        cart.promoCode = promoCode;
+    
+        cart.promoCode = promo.code; // Always save the 'code', not _id
         await cart.save();
         res.status(200).json({ message: 'Promo code applied successfully', cart });
     } catch (error) {

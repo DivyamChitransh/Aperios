@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 
 const PromoSchema = new mongoose.Schema({
     promocode : {type:String,required:true,unique:true},
-    type:{type:String,enum:['flat','percentage'],required:true},
+    type:{type:String,enum:['flat','percent'],required:true},
     value:{type:Number,required:true},
     expiresAt:{type:Date},
     usageLimit:{type:Number,default:1}
