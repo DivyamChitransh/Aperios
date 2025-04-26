@@ -2,10 +2,10 @@
 # Introduction
 This is my backend project in which I have implemented a Simple Checkout and Order Service in Node , Express and Mongo(NEM). So , In this project I had made different models , controllers and Routes . 
 
-# Live Demo 
+# 🔗Live Demo 
 Running my Service at: https://checkout-and-order-service.onrender.com
 
-# Features
+# ⚙️Features
 View cart details with subtotal, discount, delivery charges, and final total
 
 Apply promo codes for flat or percentage discounts
@@ -14,7 +14,7 @@ Update cart and item quantities
 
 Remove items from cart
 
-# API endpoints
+# 🔗API endpoints
 Post - /user/signup (For Signup of a new user)
 
 Post - /user/login (To login a user)
@@ -33,7 +33,7 @@ Post - /orders/myorders (check for the orders)
 
 Patch - /orders/status/:orderId (Update the status)
 
-# Tech Stack
+# 🔗Tech Stack
 
 Node.js (Runtime environment)
 
@@ -46,7 +46,7 @@ JWT (For Creating and verifying tokens for authorization)
 Node-Cron (For Scheduling of orders)
 
 
-## Getting Started
+## 🔗Getting Started
 
 
 ```bash
