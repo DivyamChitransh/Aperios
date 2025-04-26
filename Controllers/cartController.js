@@ -32,7 +32,6 @@ const getCart = async (req, res) => {
         cart.items.forEach(item => {
             subtotal += item.itemId.price * item.quantity;
         });
-
         let discount = 0;
         if (cart.promoCode) {
             const promo = await PromoCode.findOne({ code: cart.promoCode });
@@ -48,7 +47,6 @@ const getCart = async (req, res) => {
         }
         const deliveryCharge = 50; 
         const total = subtotal + deliveryCharge - discount;
-
         res.status(200).json({subtotal,discount,deliveryCharge,total});
     } catch (error) {
         res.status(500).json({ message: error.message });
@@ -62,30 +60,24 @@ const applyPromoCode = async (req, res) => {
         if (!cart) {
             return res.status(404).json({ message: 'Cart not found' });
         }
-    
         let promo = null;
-    
         if (promoCode.match(/^[0-9a-fA-F]{24}$/)) {
             promo = await PromoCode.findById(promoCode);
-        } 
-            
+        }  
         if (!promo) {
             promo = await PromoCode.findOne({ code: promoCode });
         }
-    
         if (!promo) {
             return res.status(404).json({ message: 'Promo code not found' });
         }
-    
         if (promo.expiresAt < Date.now()) {
             return res.status(400).json({ message: 'Promo code has expired' });
         }
-    
         if (promo.usageLimit <= 0) {
             return res.status(400).json({ message: 'Promo code usage limit exceeded' });
         }
     
-        cart.promoCode = promo.code; // Always save the 'code', not _id
+        cart.promoCode = promo.code;
         await cart.save();
         res.status(200).json({ message: 'Promo code applied successfully', cart });
     } catch (error) {
