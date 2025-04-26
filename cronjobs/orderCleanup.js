@@ -1,5 +1,5 @@
 const cron = require('node-cron');
-const Order = require('../models/orderModel');
+const Order = require('../models/ordermodels.js');
 
 cron.schedule('0 0 * * *', async () => {
     console.log('Running scheduled job: Cleaning up old cancelled orders...');
