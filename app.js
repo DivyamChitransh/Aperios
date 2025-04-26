@@ -25,6 +25,8 @@ app.use('/promocode',promocoderoutes);
 app.use('/orders',orderroutes);
 app.use('/user',userroutes);
 
+require('./cronjobs/orderCleanup.js')
+
 mongoose.connect(mongo_URI).then(() => console.log('Database Connected!')).catch(err => console.log('Error in Connecting',err))
 
 app.listen(PORT,() => {
