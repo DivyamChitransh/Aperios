@@ -29,7 +29,7 @@ Get - /cart (get cart based on userID)
 
 Post - /orders/place (Place a new order)
 
-Post - /orders/myorders (check for the orders)
+Get - /orders/myorders (check for the orders)
 
 Patch - /orders/status/:orderId (Update the status)
 
