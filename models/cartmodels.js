@@ -8,7 +8,7 @@ const cartSchema = new mongoose.Schema({
 const cartuserSchema = new mongoose.Schema({
     userID : {type:String,required:true},
     items : [cartSchema],
-    promoCode : {type:mongoose.Schema.Types.ObjectId,ref:'PromoCode'}
+    promoCode : {type:String}
 });
 
 module.exports = mongoose.model('cart',cartuserSchema);
